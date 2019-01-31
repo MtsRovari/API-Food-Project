@@ -1,0 +1,30 @@
+{
+  "name": "food_project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "bcrypt": "^3.0.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.8",
+    "require-dir": "^1.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MtsRovari/API-Food-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MtsRovari/API-Food-Project/issues"
+  },
+  "homepage": "https://github.com/MtsRovari/API-Food-Project#readme",
+  "description": ""
+}
