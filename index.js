@@ -8,10 +8,10 @@ const app = express();
 
 app.use(express.json());
 
-// mongoose.connect('mongodb://localhost:27017/food_projecy', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/food_project', { useNewUrlParser: true });
 
-// requireDir('./src/model/');
+requireDir('./src/model');  
 
-// app.use('/api', require('./src/routes'));
+app.use('/api', require('./src/routes'));
 
 app.listen(3001);
