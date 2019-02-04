@@ -6,27 +6,27 @@ module.exports = {
     async index(req, res){
         const { page = 1 } = req.query;
         
-        const Restaurants = await Restaurant.paginate({}, { page, limit: 50 });
+        const restaurants = await Restaurant.paginate({}, { page, limit: 50 });
 
-        return res.json(Restaurants);
+        return res.json(restaurants);
     },
 
     async view(req, res){
-        const Restaurant = await Restaurant.findById(req.params.id);
+        const restaurant = await Restaurant.findById(req.params.id);
 
-        return res.json(Restaurant);
+        return res.json(restaurant);
     },
 
     async create(req, res){
-        const Restaurant = await Restaurant.create(req.body);
+        const restaurant = await Restaurant.create(req.body);
 
-        return res.json(Restaurant);
+        return res.json(restaurant);
     },
 
     async edit(req, res){
-        const Restaurant = await Restaurant.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const restaurant = await Restaurant.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
-        return res.json(Restaurant);
+        return res.json(restaurant);
     },
 
     async delete(req, res){
