@@ -28,4 +28,17 @@ routes.put('/restaurants/:id', Restaurant.edit);
 
 routes.delete('/restaurants/:id', Restaurant.delete);
 
+
+const Product = require('./controller/products');
+
+routes.get('/products', Product.index);
+
+routes.get('/products/:id', Product.view);
+
+routes.post('/products', Product.create);
+
+routes.put('/products/:id', Product.edit);
+
+routes.delete('/products/:id', Product.delete);
+
 module.exports = routes;
