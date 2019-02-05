@@ -41,4 +41,13 @@ routes.put('/products/:id', Product.edit);
 
 routes.delete('/products/:id', Product.delete);
 
+
+const Category = require('./controller/categories');
+
+routes.get('/categories', Category.index);
+
+routes.post('/categories', Category.create);
+
+routes.delete('/categories/:id', Category.delete);
+
 module.exports = routes;
