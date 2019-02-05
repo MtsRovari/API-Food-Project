@@ -2,14 +2,17 @@ const express = require('express');
 
 const routes = express.Router();
 
-
+//metodo de login
+//metodo de cadastro com confirmação de senha
 const User = require('./controller/users');
 
 routes.get('/users', User.index);
 
 routes.get('/users/:id', User.view);
 
-routes.post('/users', User.create);
+// routes.post('/auth/login', User.login);
+
+routes.post('/auth/register', User.register);
 
 routes.put('/users/:id', User.edit);
 
@@ -29,6 +32,7 @@ routes.put('/restaurants/:id', Restaurant.edit);
 routes.delete('/restaurants/:id', Restaurant.delete);
 
 
+//validação de id de restaurante e categoria
 const Product = require('./controller/products');
 
 routes.get('/products', Product.index);
@@ -49,5 +53,6 @@ routes.get('/categories', Category.index);
 routes.post('/categories', Category.create);
 
 routes.delete('/categories/:id', Category.delete);
+
 
 module.exports = routes;

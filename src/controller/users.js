@@ -17,10 +17,44 @@ module.exports = {
         return res.json(user);
     },
 
-    async create(req, res){
-        const user = await User.create(req.body);
+    // async login(req, res) {
+    //     const user = await User.findOne({email: req.params.email, password: req.params.password});
 
-        return res.json(user);
+    //     // return res.json(req.params);
+    // },
+
+    async register(req, res){
+
+        const { name, email, password, confirm_password } = req.body;
+
+        let errors = [];
+
+        if (!name || !email || !password || !confirm_password){
+            errors.push({ msg: "Preencha todos os campos" });
+        }
+
+        if (password !== confirm_password){
+            errors.push({ msg: "As senhas não são identicas" });
+        }
+
+        if (password.length < 6){
+            errors.push({ msg: "A senha deve ter mais que 6 caracteres" });
+        }
+
+        if (errors.length > 0) {
+            return res.json({
+                errors,
+                name,
+                email
+            });
+
+        } else {
+            res.send('res');
+        }
+
+        // const user = await User.create(req.body);
+
+        // return res.json(user);
     },
 
     async edit(req, res){
