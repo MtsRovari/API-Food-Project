@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const User = mongoose.model('User');
 
+const bcrypt = require('bcryptjs');
+
 module.exports = {
     async index(req, res){
         const { page = 1 } = req.query;
@@ -49,7 +51,28 @@ module.exports = {
             });
 
         } else {
-            res.send('res');
+            User.findOne({ email }).then(user => {
+                if(user) {
+                    errors.push({msg: "Este usuário já existe"});
+
+                    return res.json({
+                        errors,
+                        name,
+                        email
+                    });
+                } else {
+                    const newUser = new User({
+                        name,
+                        email,
+                        password
+                    });
+
+                    bcrypt.genSalt(10, (err, salt) => {
+                        //password hash
+                    });
+                }
+            });
+        //    return res.send(true);
         }
 
         // const user = await User.create(req.body);
