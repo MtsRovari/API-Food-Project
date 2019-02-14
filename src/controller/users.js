@@ -67,9 +67,16 @@ module.exports = {
                         password
                     });
 
-                    bcrypt.genSalt(10, (err, salt) => {
-                        //password hash
-                    });
+                    bcrypt.genSalt(10, (err, salt) => bcrypt.hash(newUser.password, salt, (err, hash) => {
+                        if(err) throw err;
+
+                        newUser.password = hash;
+
+                        newUser
+                            .save()
+                            .then(res.send(true))
+                            .catch(err => console.log(err));
+                    }));
                 }
             });
         //    return res.send(true);
