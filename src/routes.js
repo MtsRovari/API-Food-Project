@@ -10,7 +10,7 @@ routes.get('/users', User.index);
 
 routes.get('/users/:id', User.view);
 
-// routes.post('/auth/login', User.login);
+routes.post('/auth/login', User.login);
 
 routes.post('/auth/register', User.register);
 
