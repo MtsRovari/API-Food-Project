@@ -28,13 +28,15 @@ module.exports = {
         passport.authenticate('local', (err, user, info) => {
             if (err) { errors.push({ msg: next(err) }) }
 
-            if (!user) { errors.push({ msg: "Email ou senha incorretos" }) }
-
-            req.logIn(user, err => {
-                if (err) { errors.push({ msg: next(err) }) }
-
-                return res.json(true);
-            });
+            if (!user) { 
+                errors.push({ msg: "Email ou senha incorretos" }) 
+            } else {
+                req.logIn(user, err => {
+                    if (err) { errors.push({ msg: next(err) }) }
+                    
+                    return res.json(true);
+                });
+            }
 
             if (errors.length > 0) {
                 return res.json({
