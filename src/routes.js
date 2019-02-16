@@ -2,11 +2,13 @@ const express = require('express');
 
 const routes = express.Router();
 
+const { ensureAuthenticated } = require('./config/auth');
+
 //metodo de login
 //metodo de cadastro com confirmação de senha
 const User = require('./controller/users');
 
-routes.get('/users', User.index);
+routes.get('/users', ensureAuthenticated, User.index);
 
 routes.get('/users/:id', User.view);
 

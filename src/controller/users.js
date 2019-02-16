@@ -8,6 +8,7 @@ const passport = require('passport');
 
 module.exports = {
     async index(req, res){
+        
         const { page = 1 } = req.query;
         
         const users = await User.paginate({}, { page, limit: 50 });
@@ -113,12 +114,7 @@ module.exports = {
     async logout(req, res) {
         req.logout();
 
-        return res.json(true);
-        // if (req.logout()) {
-        //     return res.json(true); 
-        // } else {
-        //     return res.json(false);
-        // }
+        return res.send(true);
     },
 
     async edit(req, res){
