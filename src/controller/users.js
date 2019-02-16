@@ -4,6 +4,8 @@ const User = mongoose.model('User');
 
 const bcrypt = require('bcryptjs');
 
+const passport = require('passport');
+
 module.exports = {
     async index(req, res){
         const { page = 1 } = req.query;
@@ -19,11 +21,30 @@ module.exports = {
         return res.json(user);
     },
 
-    // async login(req, res) {
-    //     const user = await User.findOne({email: req.params.email, password: req.params.password});
+    async login(req, res, next) {
 
-    //     // return res.json(req.params);
-    // },
+        let errors = [];
+
+        passport.authenticate('local', (err, user, info) => {
+            if (err) { errors.push({ msg: next(err) }) }
+
+            if (!user) { errors.push({ msg: "Email ou senha incorretos" }) }
+
+            req.logIn(user, err => {
+                if (err) { errors.push({ msg: next(err) }) }
+
+                return res.json(true);
+            });
+
+            if (errors.length > 0) {
+                return res.json({
+                    errors,
+                    email: req.body.email
+                });
+            }
+
+        })(req, res, next);
+    },
 
     async register(req, res){
 
