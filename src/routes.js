@@ -10,15 +10,15 @@ const User = require('./controller/users');
 
 routes.get('/users', ensureAuthenticated, User.index);
 
-routes.get('/users/:id', User.view);
+routes.post('/auth/register', User.register);
 
 routes.post('/auth/login', User.login);
 
+routes.get('/users/profile/:id', User.profile);
+
+routes.put('/users/profile/:id', User.profileEdit);
+
 routes.get('/auth/logout', User.logout);
-
-routes.post('/auth/register', User.register);
-
-routes.put('/users/:id', User.edit);
 
 routes.delete('/users/:id', User.delete);
 

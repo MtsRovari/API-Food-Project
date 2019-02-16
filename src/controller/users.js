@@ -16,12 +16,6 @@ module.exports = {
         return res.json(users);
     },
 
-    async view(req, res){
-        const user = await User.findById(req.params.id);
-
-        return res.json(user);
-    },
-
     async login(req, res, next) {
 
         let errors = [];
@@ -103,12 +97,7 @@ module.exports = {
                     }));
                 }
             });
-        //    return res.send(true);
         }
-
-        // const user = await User.create(req.body);
-
-        // return res.json(user);
     },
 
     async logout(req, res) {
@@ -117,10 +106,16 @@ module.exports = {
         return res.send(true);
     },
 
-    async edit(req, res){
-        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    async profile(req, res){
+        const user = await User.findById(req.params.id);
 
         return res.json(user);
+    },
+
+    async profileEdit(req, res){
+        await User.findOneAndUpdate(req.params.id, req.body, { new: true });
+        
+        return res.send(true);
     },
 
     async delete(req, res){
