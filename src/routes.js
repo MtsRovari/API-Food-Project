@@ -12,6 +12,8 @@ routes.get('/users/:id', User.view);
 
 routes.post('/auth/login', User.login);
 
+routes.get('/auth/logout', User.logout);
+
 routes.post('/auth/register', User.register);
 
 routes.put('/users/:id', User.edit);

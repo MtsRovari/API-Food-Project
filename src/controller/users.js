@@ -110,6 +110,17 @@ module.exports = {
         // return res.json(user);
     },
 
+    async logout(req, res) {
+        req.logout();
+
+        return res.json(true);
+        // if (req.logout()) {
+        //     return res.json(true); 
+        // } else {
+        //     return res.json(false);
+        // }
+    },
+
     async edit(req, res){
         const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
