@@ -43,7 +43,7 @@ module.exports = {
         })(req, res, next);
     },
 
-    async register(req, res){
+    async register(req, res) {
 
         const { name, email, password, confirm_password } = req.body;
 

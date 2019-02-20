@@ -4,6 +4,6 @@ module.exports = {
             return next();
         }
 
-        res.send(false);
+        res.status(405).end();
     }
 };
