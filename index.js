@@ -10,11 +10,13 @@ const passport = require('passport');
 
 const app = express();
 
+const db = require('./src/config/key').MongoURI;
+
 app.use(express.json());
 
 app.use(session({ secret: 'passport-auth', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
 
-mongoose.connect('mongodb://localhost:27017/food_project', { useNewUrlParser: true });
+mongoose.connect(db, { useNewUrlParser: true });
 
 requireDir('./src/model');  
 

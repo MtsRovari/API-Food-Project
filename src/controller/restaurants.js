@@ -22,13 +22,13 @@ module.exports = {
     async create(req, res){
         if(req.files) {
             const file = req.files.filename;
-
+            
             await file.mv(`../uploads/${file.name}`, err => {
                 if(err) {
                     res.send(false);
                 } else {
                     const restaurant = Restaurant.create(req.body);
-
+                    
                     if(restaurant) {
                         res.send(true);
                     } else {
@@ -37,8 +37,8 @@ module.exports = {
                 }
             });
         } else {
-            const restaurant = Restaurant.create(req.body);
-
+            const restaurant = await Restaurant.create(req.body);
+            
             if(restaurant) {
                 res.send(true);
             } else {
