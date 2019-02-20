@@ -20,12 +20,12 @@ const Restaurant = new mongoose.Schema({
 
     logo: {
         type: String,
-        required: true
+        required: false
     },
 
     cover: {
         type: String,
-        required: true
+        required: false
     },
 
     description: {
