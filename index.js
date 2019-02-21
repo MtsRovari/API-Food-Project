@@ -4,8 +4,6 @@ const session = require('express-session');
 
 const mongoose = require('mongoose');
 
-const bodyParser = require('body-parser')
-
 const requireDir = require('require-dir');
 
 const passport = require('passport');

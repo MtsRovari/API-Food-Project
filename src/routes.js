@@ -14,13 +14,13 @@ routes.post('/auth/register', User.register);
 
 routes.post('/auth/login', User.login);
 
-routes.get('/users/profile/:id', User.profile);
+routes.get('/users/profile/:id', ensureAuthenticated, User.profile);
 
-routes.put('/users/profile/:id', User.profileEdit);
+routes.put('/users/profile/:id', ensureAuthenticated, User.profileEdit);
 
-routes.get('/auth/logout', User.logout);
+routes.get('/auth/logout', ensureAuthenticated,User.logout);
 
-routes.delete('/users/:id', User.delete);
+routes.delete('/users/:id', ensureAuthenticated,User.delete);
 
 
 const Restaurant = require('./controller/restaurants');
