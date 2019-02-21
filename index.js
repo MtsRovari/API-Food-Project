@@ -28,4 +28,6 @@ app.use(passport.session());
 
 app.use('/api', require('./src/routes'));
 
-app.listen(3000);
+var port = process.env.PORT || 3000;
+
+app.listen(port);
