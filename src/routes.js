@@ -52,11 +52,11 @@ routes.delete('/products/:id', Product.delete);
 
 const Category = require('./controller/categories');
 
-routes.get('/categories', Category.index);
+routes.get('/categories', ensureAuthenticated, Category.index);
 
-routes.post('/categories', Category.create);
+routes.post('/categories', ensureAuthenticated, Category.create);
 
-routes.delete('/categories/:id', Category.delete);
+routes.delete('/categories/:id', ensureAuthenticated, Category.delete);
 
 
 module.exports = routes;
