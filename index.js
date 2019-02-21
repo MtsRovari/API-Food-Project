@@ -12,8 +12,6 @@ const app = express();
 
 const db = require('./src/config/key').MongoURI;
 
-// app.use(express.json());
-
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({ secret: 'passport-auth', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
@@ -30,4 +28,6 @@ app.use(passport.session());
 
 app.use('/api', require('./src/routes'));
 
-app.listen(3001);
+var port = process.env.PORT || 3000;
+
+app.listen(port);
