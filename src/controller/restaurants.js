@@ -19,7 +19,7 @@ module.exports = {
         return res.json(restaurant);
     },
 
-    async create(req, res){
+    async create(req, res) {
         if(req.files) {
             const file = req.files.filename;
             
