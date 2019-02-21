@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const Restaurant = mongoose.model('Restaurant');
 
+const upload = require('express-fileupload');
+
 module.exports = {
     async index(req, res){
         const { page = 1 } = req.query;
@@ -17,10 +19,35 @@ module.exports = {
         return res.json(restaurant);
     },
 
-    async create(req, res){
-        const restaurant = await Restaurant.create(req.body);
+    async create(req, res) {
+        if(req.files) {
+            const file = req.files.filename;
+            
+            await file.mv(`../uploads/${file.name}`, err => {
+                if(err) {
+                    res.send(false);
+                } else {
+                    const restaurant = Restaurant.create(req.body);
+                    
+                    if(restaurant) {
+                        res.send(true);
+                    } else {
+                        res.send(false)
+                    }
+                }
+            });
+        } else {
+            const restaurant = await Restaurant.create(req.body);
+            
+            if(restaurant) {
+                res.send(true);
+            } else {
+                res.send(false)
+            }
+        }
 
-        return res.json(restaurant);
+
+        // return res.json(restaurant);
     },
 
     async edit(req, res){

@@ -4,8 +4,11 @@ const User = mongoose.model('User');
 
 const bcrypt = require('bcryptjs');
 
+const passport = require('passport');
+
 module.exports = {
     async index(req, res){
+        
         const { page = 1 } = req.query;
         
         const users = await User.paginate({}, { page, limit: 50 });
@@ -13,19 +16,34 @@ module.exports = {
         return res.json(users);
     },
 
-    async view(req, res){
-        const user = await User.findById(req.params.id);
+    async login(req, res, next) {
 
-        return res.json(user);
+        let errors = [];
+
+        passport.authenticate('local', (err, user, info) => {
+            if (err) { errors.push({ msg: next(err) }) }
+
+            if (!user) { 
+                errors.push({ msg: "Email ou senha incorretos" }) 
+            } else {
+                req.logIn(user, err => {
+                    if (err) { errors.push({ msg: next(err) }) }
+                    
+                    return res.json(true);
+                });
+            }
+
+            if (errors.length > 0) {
+                return res.json({
+                    errors,
+                    email: req.body.email
+                });
+            }
+
+        })(req, res, next);
     },
 
-    // async login(req, res) {
-    //     const user = await User.findOne({email: req.params.email, password: req.params.password});
-
-    //     // return res.json(req.params);
-    // },
-
-    async register(req, res){
+    async register(req, res) {
 
         const { name, email, password, confirm_password } = req.body;
 
@@ -79,18 +97,25 @@ module.exports = {
                     }));
                 }
             });
-        //    return res.send(true);
         }
-
-        // const user = await User.create(req.body);
-
-        // return res.json(user);
     },
 
-    async edit(req, res){
-        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    async logout(req, res) {
+        req.logout();
+
+        return res.send(true);
+    },
+
+    async profile(req, res){
+        const user = await User.findById(req.params.id);
 
         return res.json(user);
+    },
+
+    async profileEdit(req, res){
+        await User.findOneAndUpdate(req.params.id, req.body, { new: true });
+        
+        return res.send(true);
     },
 
     async delete(req, res){
