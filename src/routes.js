@@ -6,6 +6,7 @@ const { ensureAuthenticated } = require('./config/auth');
 
 //metodo de login
 //metodo de cadastro com confirmação de senha
+
 routes.get('/', (req, res) => res.send('/api para acessar'));
 
 const User = require('./controller/users');
